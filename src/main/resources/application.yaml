@@ -1,0 +1,8 @@
+
+spring:
+  profiles:
+    group:
+      default: common, local
+      local: common, local
+      dev: common, stage
+      prod: common, prod
