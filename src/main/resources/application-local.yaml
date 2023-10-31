@@ -14,8 +14,8 @@ spring:
       enabled: true
 
   datasource:
-    url: jdbc:h2:tcp://localhost/~/aladdinsys-api;
-    driver-class-name: org.h2.Driver
+    url: jdbc:p6spy:h2:tcp://localhost/~/aladdinsys-api;
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     username: aladdin
     password:
   jpa:
