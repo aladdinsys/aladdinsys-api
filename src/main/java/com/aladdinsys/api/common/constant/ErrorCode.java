@@ -3,8 +3,6 @@ package com.aladdinsys.api.common.constant;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 
-import static org.springframework.http.HttpStatus.*;
-
 @AllArgsConstructor
 public enum ErrorCode implements Code {
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "권한이 없습니다."),
