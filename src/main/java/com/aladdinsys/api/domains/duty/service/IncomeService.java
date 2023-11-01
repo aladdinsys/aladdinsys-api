@@ -1,5 +1,7 @@
 package com.aladdinsys.api.domains.duty.service;
 
+import com.aladdinsys.api.common.constant.ErrorCode;
+import com.aladdinsys.api.common.exception.CustomException;
 import com.aladdinsys.api.domains.duty.dto.IncomeRequestDto;
 import com.aladdinsys.api.domains.duty.dto.IncomeResponseDto;
 import com.aladdinsys.api.domains.duty.entity.Income;
@@ -30,7 +32,7 @@ public class IncomeService {
     }
     @Transactional(readOnly = true)
     public IncomeResponseDto findById(Long id) {
-        Income entity = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("id not found"));
+        Income entity = repository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
         return IncomeResponseDto.of(entity.getId(), entity.getName());
     }
     @Transactional(readOnly = true)
