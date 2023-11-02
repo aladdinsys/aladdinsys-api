@@ -1,0 +1,10 @@
+### Get Request
+GET http://{{ip}}:{{port}}/incomes
+
+### Post Request
+POST http://{{ip}}:{{port}}/incomes
+Content-Type: application/json
+
+{
+  "name": "incomes-name"
+}
