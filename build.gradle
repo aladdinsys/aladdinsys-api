@@ -67,6 +67,12 @@ asciidoctor.doFirst {
 
 bootJar {
     dependsOn asciidoctor
-    from file("build/docs/asciidoc/")
+    finalizedBy('copyDocument')
+}
+
+task copyDocument(type: Copy) {
+    dependsOn bootJar
+    from file("build/docs/asciidoc")
     into file("src/main/resources/static/docs")
 }
+
