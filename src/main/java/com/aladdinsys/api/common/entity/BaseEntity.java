@@ -20,12 +20,21 @@ public class BaseEntity {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @CreatedDate
-    @LastModifiedDate
-    @Column(name = "upd_dt", updatable = false)
-    private LocalDateTime updDt;
+    @Column(name = "created_dt", nullable = false, updatable = false)
+    private LocalDateTime createdDt;
 
     @CreatedBy
+    @Column(name = "created_by", nullable = false, length = 100)
+    private String createdBy;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @LastModifiedDate
+    @Column(name = "created_dt", nullable = false)
+    private LocalDateTime modifiedDt;
+
     @LastModifiedBy
-    @Column(name = "upd_user", updatable = false)
-    private String updUser;
+    @Column(name = "modified_by", nullable = false, length = 100)
+    private String modifiedBy;
+
+
 }
