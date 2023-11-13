@@ -1,4 +1,4 @@
-package com.aladdinsys.api.domains.duty.entity;
+package com.aladdinsys.api.domains.human_resource.entity;
 
 import com.aladdinsys.api.common.entity.BaseEntity;
 import lombok.AccessLevel;
@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "income")
+@Table(name = "department")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Income extends BaseEntity {
+public class Department extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -22,7 +23,7 @@ public class Income extends BaseEntity {
     private String name;
 
     @Builder
-    public Income(Long id, String name) {
+    public Department(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -30,4 +31,5 @@ public class Income extends BaseEntity {
     public void update(String name) {
         this.name = name;
     }
+
 }

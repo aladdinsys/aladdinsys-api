@@ -1,23 +1,21 @@
 package com.aladdinsys.api.common.response;
 
 import com.aladdinsys.api.common.constant.SuccessCode;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 import javax.validation.constraints.NotNull;
 
 import static com.aladdinsys.api.common.constant.SuccessCode.SUCCESS;
 
+@Getter
 public class DataResponseBody<T> extends ResponseBody {
 
-    private final T data;
+    private final T result;
 
     public DataResponseBody(HttpStatus status, String message, T data) {
         super(status, message);
-        this.data = data;
-    }
-
-    public T getData() {
-        return data;
+        this.result = data;
     }
 
     public static <T> DataResponseBody<T> of(T data) {

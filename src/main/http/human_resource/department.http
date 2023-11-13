@@ -1,0 +1,24 @@
+### Post Request
+POST http://{{ip}}:{{port}}/departments
+Content-Type: application/json
+
+{
+  "name": "부서"
+}
+
+### Get Request
+GET http://{{ip}}:{{port}}/departments
+
+### Get One Request
+GET http://{{ip}}:{{port}}/departments/3
+
+### Put Request
+PUT http://{{ip}}:{{port}}/departments/3
+Content-Type: application/json
+
+{
+  "name": "부서_수정"
+}
+
+### Delete Request
+DELETE http://{{ip}}:{{port}}/departments/3
