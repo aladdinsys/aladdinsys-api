@@ -1,24 +1,22 @@
 ### Post Request
-POST http://{{ip}}:{{port}}/departments
+POST {{domain}}:{{port}}/departments
 Content-Type: application/json
 
 {
-  "name": "부서"
+  "name": "부서2"
 }
 
 ### Get Request
-GET http://{{ip}}:{{port}}/departments
+GET {{domain}}:{{port}}/departments
 
 ### Get One Request
-GET http://{{ip}}:{{port}}/departments/3
+GET {{domain}}:{{port}}/departments/1
 
 ### Put Request
-PUT http://{{ip}}:{{port}}/departments/3
+PUT {{domain}}:{{port}}/departments/2
 Content-Type: application/json
 
 {
   "name": "부서_수정"
 }
 
-### Delete Request
-DELETE http://{{ip}}:{{port}}/departments/3

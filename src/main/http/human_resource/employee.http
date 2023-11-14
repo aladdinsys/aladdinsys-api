@@ -1,0 +1,39 @@
+### Post Request
+POST {{domain}}:{{port}}/employees
+Content-Type: application/json
+
+{
+  "departmentId": 1,
+  "name": "직원2"
+}
+
+### Get Request
+GET {{domain}}:{{port}}/employees
+
+### Get One Request
+GET {{domain}}:{{port}}/employees/2
+
+### Get By Department Request
+GET {{domain}}:{{port}}/departments/2/employees
+
+### Put Request
+PUT {{domain}}:{{port}}/employees/2
+Content-Type: application/json
+
+{
+  "name": "직원_PUT",
+  "departmentId": 2
+}
+
+
+### Patch Request
+PATCH {{domain}}:{{port}}/employees/4
+Content-Type: application/json
+
+{
+  "name": "직원_PATCH"
+}
+
+
+### Delete Request
+DELETE {{domain}}:{{port}}/employees/1
