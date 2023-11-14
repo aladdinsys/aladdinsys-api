@@ -3,7 +3,7 @@ POST {{domain}}:{{port}}/departments
 Content-Type: application/json
 
 {
-  "name": "부서2"
+  "name": "부서"
 }
 
 ### Get Request
