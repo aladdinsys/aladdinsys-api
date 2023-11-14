@@ -1,4 +1,4 @@
-package com.aladdinsys.api.common.configs.web;
+package com.aladdinsys.api.common.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;

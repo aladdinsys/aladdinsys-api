@@ -1,6 +1,8 @@
 package com.aladdinsys.api.domains.human_resource.controller;
 
+import com.aladdinsys.api.common.constant.ErrorCode;
 import com.aladdinsys.api.common.constant.SuccessCode;
+import com.aladdinsys.api.common.exception.CustomException;
 import com.aladdinsys.api.domains.human_resource.dto.DepartmentRequestDto;
 import com.aladdinsys.api.domains.human_resource.dto.DepartmentResponseDto;
 import com.aladdinsys.api.domains.human_resource.service.DepartmentService;
@@ -30,6 +32,7 @@ import java.util.List;
 import static com.aladdinsys.api.ApiDocumentUtils.getDocumentRequest;
 import static com.aladdinsys.api.ApiDocumentUtils.getDocumentResponse;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
@@ -60,7 +63,6 @@ class DepartmentControllerTest {
         objectMapper = new ObjectMapper();
 
         Long id = departmentService.save(new DepartmentRequestDto("이름"));
-        System.out.println("id = " + id);
 
         em.clear();
     }
@@ -106,20 +108,21 @@ class DepartmentControllerTest {
         Long savedId = departmentService.save(new DepartmentRequestDto(name));
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/departments/{id}", savedId)
-                        .contentType(MediaType.APPLICATION_JSON))
+                            .contentType(MediaType.APPLICATION_JSON))
                         .andExpect(status().isOk())
                         .andExpect(jsonPath("$.result").exists())
                         .andDo(document("{class-name}/{method-name}",
-                        getDocumentRequest(),
-                        getDocumentResponse(),
-                        responseFields(
-                                fieldWithPath("timestamp").type(JsonFieldType.STRING).description("시간"),
-                                fieldWithPath("status").type(JsonFieldType.STRING).description("상태"),
-                                fieldWithPath("message").type(JsonFieldType.STRING).description("메세지"),
-                                fieldWithPath("result.id").type(JsonFieldType.NUMBER).description("아이디"),
-                                fieldWithPath("result.name").type(JsonFieldType.STRING).description("이름")
+                                    getDocumentRequest(),
+                                    getDocumentResponse(),
+                                    responseFields(
+                                            fieldWithPath("timestamp").type(JsonFieldType.STRING).description("시간"),
+                                            fieldWithPath("status").type(JsonFieldType.STRING).description("상태"),
+                                            fieldWithPath("message").type(JsonFieldType.STRING).description("메세지"),
+                                            fieldWithPath("result.id").type(JsonFieldType.NUMBER).description("아이디"),
+                                            fieldWithPath("result.name").type(JsonFieldType.STRING).description("이름")
+                                    )
+                                )
                         )
-                ))
                 .andReturn();
 
         String jsonResponse = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
@@ -129,6 +132,7 @@ class DepartmentControllerTest {
     }
 
     @Test
+    @DisplayName("POST /departments")
     void post() throws Exception {
 
         DepartmentRequestDto requestDto = DepartmentRequestDto.builder()
@@ -157,6 +161,7 @@ class DepartmentControllerTest {
     }
 
     @Test
+    @DisplayName("PUT /departments/{id}")
     void put() throws Exception {
 
         DepartmentRequestDto requestDto = DepartmentRequestDto.builder()
@@ -185,15 +190,17 @@ class DepartmentControllerTest {
 
         String jsonResponse = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
         assertThat(JsonPath.<String>read(jsonResponse, "$.status")).isEqualTo(SuccessCode.SUCCESS_PUT.getHttpStatus().name());
-
         assertThat(afterPut.name()).isEqualTo(requestDto.name());
 
     }
 
     @Test
+    @DisplayName("DELETE /departments/{id}")
     void delete() throws Exception {
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/departments/1")
+        DepartmentResponseDto responseDto = departmentService.findAll().get(0);
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/departments/{id}",responseDto.id())
                                             .contentType(MediaType.APPLICATION_JSON))
                                     .andExpect(status().isNoContent())
                                     .andDo(document("{class-name}/{method-name}",
@@ -209,6 +216,12 @@ class DepartmentControllerTest {
                                     .andReturn();
 
         String jsonResponse = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
+
+        CustomException exception = assertThrows(CustomException.class, () -> {
+            departmentService.findById(responseDto.id());
+        });
+
+        assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.NOT_FOUND);
         assertThat(JsonPath.<String>read(jsonResponse, "$.status")).isEqualTo(SuccessCode.SUCCESS_DELETE.getHttpStatus().name());
     }
 }

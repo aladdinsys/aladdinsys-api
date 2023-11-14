@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>부서 API</title>
+<title>직원 API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -441,13 +441,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="DepartmentAPI">부서 API</h2>
+<h2 id="EmployeeAPI">직원 API</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_목록_조회">목록 조회</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /departments HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /employees HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
@@ -462,15 +462,19 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 152
+Content-Length: 226
 
 {
   "timestamp" : "2023-11-14 09:32:56",
   "status" : "OK",
   "message" : "성공",
   "result" : [ {
-    "id" : 4,
-    "name" : "이름"
+    "id" : 1,
+    "name" : "직원1",
+    "department" : {
+      "id" : 8,
+      "name" : "부서1"
+    }
   } ]
 }</code></pre>
 </div>
@@ -480,7 +484,7 @@ Content-Length: 152
 <h3 id="_id로_조회">ID로 조회</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /departments/3 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /employees/8 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
@@ -495,15 +499,19 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 155
+Content-Length: 223
 
 {
   "timestamp" : "2023-11-14 09:32:56",
   "status" : "OK",
   "message" : "성공",
   "result" : {
-    "id" : 3,
-    "name" : "부서 이름"
+    "id" : 8,
+    "name" : "직원1",
+    "department" : {
+      "id" : 14,
+      "name" : "부서1"
+    }
   }
 }</code></pre>
 </div>
@@ -513,13 +521,14 @@ Content-Length: 155
 <h3 id="_등록">등록</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /departments HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /employees HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 25
+Content-Length: 50
 Host: localhost:8080
 
 {
-  "name" : "부서"
+  "name" : "직원2",
+  "departmentId" : 12
 }</code></pre>
 </div>
 </div>
@@ -539,7 +548,7 @@ Content-Length: 117
   "timestamp" : "2023-11-14 09:32:56",
   "status" : "CREATED",
   "message" : "등록 성공",
-  "result" : 7
+  "result" : 6
 }</code></pre>
 </div>
 </div>
@@ -548,13 +557,49 @@ Content-Length: 117
 <h3 id="_수정">수정</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /departments/5 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">PUT /employees/4 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 32
+Content-Length: 66
 Host: localhost:8080
 
 {
-  "name" : "부서_수정"
+  "name" : "수정된 직원 이름",
+  "departmentId" : 11
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 202 Accepted
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 101
+
+{
+  "timestamp" : "2023-11-14 09:32:56",
+  "status" : "ACCEPTED",
+  "message" : "수정 성공"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_부서_변경">부서 변경</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">PATCH /employees/7 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 45
+Host: localhost:8080
+
+{
+  "name" : null,
+  "departmentId" : 13
 }</code></pre>
 </div>
 </div>
@@ -582,7 +627,7 @@ Content-Length: 101
 <h3 id="_삭제">삭제</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /departments/1 HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">DELETE /employees/2 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
@@ -613,7 +658,7 @@ Content-Length: 103
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2023-11-14 09:27:11 +0900
+Last updated 2023-11-14 09:25:39 +0900
 </div>
 </div>
 </body>

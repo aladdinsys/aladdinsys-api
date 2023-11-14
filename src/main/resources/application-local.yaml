@@ -30,20 +30,25 @@ spring:
     ansi:
       enabled: always
 
-logging:
-  level: # 적용할 곳과 레벨을 지정합니다.
-    root: WARN
-    org:
-      hibernate:
-        SQL: ERROR
-        type:
-          descriptor:
-            sql:
-              BasicBinder: trace
-  file:
-    name: C:/Dev/aladdin-logs/api/logging.log
-  logback:
-    rolling-policy:
-      file-name-pattern: C:/Dev/aladdin-logs/api/%d{yyyy-MM-dd}_%i.gz
-  pattern:
-    file: "[%d{yyyy-MM-dd HH:mm:ss}:%-4relative] [%thread] %-5level %logger{35} - %msg%n"
+  decorator:
+    datasource:
+      p6spy:
+        enable-logging: true
+
+#logging:
+#  level: # 적용할 곳과 레벨을 지정합니다.
+#    root: WARN
+#    org:
+#      hibernate:
+#        SQL: INFO
+#        type:
+#          descriptor:
+#            sql:
+#              BasicBinder: trace
+#  file:
+#    name: C:/Dev/aladdin-logs/api/logging.log
+#  logback:
+#    rolling-policy:
+#      file-name-pattern: C:/Dev/aladdin-logs/api/%d{yyyy-MM-dd}_%i.gz
+#  pattern:
+#    file: "[%d{yyyy-MM-dd HH:mm:ss}:%-4relative] [%thread] %-5level %logger{35} - %msg%n"

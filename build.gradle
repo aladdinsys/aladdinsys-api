@@ -1,8 +1,15 @@
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.7.17'
+    id 'org.springframework.boot' version '2.7.3'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group = 'com.aladdinsys'
@@ -35,20 +42,50 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
     implementation 'p6spy:p6spy:3.9.1'
     implementation 'org.jetbrains:annotations:24.0.0'
-    testImplementation 'junit:junit:4.13.1'
-    compileOnly 'org.projectlombok:lombok'
+
+    // QueryDSL ====================================================
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
+    // =============================================================
+
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'org.postgresql:postgresql'
+
+    compileOnly 'org.projectlombok:lombok'
+    compileOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'junit:junit:4.13.1'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     testImplementation 'org.springframework.security:spring-security-test'
 
     asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 }
+
+
+// (4) queryDSL 추가 : QueryDSL 빌드 옵션
+def querydslDir = layout.buildDirectory.dir('generated/querydsl').get().asFile
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+sourceSets {
+    main.java.srcDir querydslDir
+}
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
+
 
 tasks.named('test', Test) {
     outputs.dir snippetsDir
@@ -59,6 +96,12 @@ asciidoctor {
     inputs.dir snippetsDir
     configurations 'asciidoctorExt'
     dependsOn test
+
+    sources{
+        include("**/index.adoc","**/*.adoc")
+    }
+
+    baseDirFollowsSourceFile()
 }
 
 
@@ -73,7 +116,7 @@ bootJar {
 
 task copyDocument(type: Copy) {
     dependsOn bootJar
-    from file("build/docs/asciidoc")
+    from layout.buildDirectory.dir('docs/asciidoc').get().asFile
     into file("src/main/resources/static/docs")
 }
 

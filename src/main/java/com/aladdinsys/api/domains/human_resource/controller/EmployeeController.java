@@ -1,8 +1,9 @@
 package com.aladdinsys.api.domains.human_resource.controller;
 
-import com.aladdinsys.api.common.response.ResponseBody;
 import com.aladdinsys.api.common.response.DataResponseBody;
-import com.aladdinsys.api.domains.human_resource.dto.EmployeeRequestDto;
+import com.aladdinsys.api.common.response.ResponseBody;
+import com.aladdinsys.api.domains.human_resource.dto.EmployeePatchDto;
+import com.aladdinsys.api.domains.human_resource.dto.EmployeePostDto;
 import com.aladdinsys.api.domains.human_resource.dto.EmployeeResponseDto;
 import com.aladdinsys.api.domains.human_resource.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -33,21 +34,21 @@ public class EmployeeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DataResponseBody<Long> post(@Valid @RequestBody EmployeeRequestDto dto) {
-        return DataResponseBody.of(service.save(dto));
+    public DataResponseBody<Long> post(@Valid @RequestBody EmployeePostDto dto) {
+        return DataResponseBody.of(SUCCESS_CREATE, service.save(dto));
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseBody put(@PathVariable Long id, @Valid @RequestBody EmployeeRequestDto dto) {
-        service.updateById(id, dto);
+    public ResponseBody put(@PathVariable Long id, @Valid @RequestBody EmployeePostDto dto) {
+        service.put(id, dto);
         return ResponseBody.of(SUCCESS_PUT);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseBody patch(@PathVariable Long id, @Valid @RequestBody EmployeeRequestDto dto) {
-        service.updateById(id, dto);
+    public ResponseBody patch(@PathVariable Long id, @Valid @RequestBody EmployeePatchDto dto) {
+        service.patch(id, dto);
         return ResponseBody.of(SUCCESS_PATCH);
     }
 

@@ -2,7 +2,9 @@ package com.aladdinsys.api.domains.human_resource.service;
 
 import com.aladdinsys.api.common.constant.ErrorCode;
 import com.aladdinsys.api.common.exception.CustomException;
-import com.aladdinsys.api.domains.human_resource.dto.EmployeeRequestDto;
+import com.aladdinsys.api.domains.human_resource.dto.DepartmentResponseDto;
+import com.aladdinsys.api.domains.human_resource.dto.EmployeePatchDto;
+import com.aladdinsys.api.domains.human_resource.dto.EmployeePostDto;
 import com.aladdinsys.api.domains.human_resource.dto.EmployeeResponseDto;
 import com.aladdinsys.api.domains.human_resource.entity.Department;
 import com.aladdinsys.api.domains.human_resource.entity.Employee;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,10 +26,13 @@ public class EmployeeService {
     private final EmployeeRepository repository;
 
     @Transactional
-    public Long save(EmployeeRequestDto dto) {
+    public Long save(EmployeePostDto dto) {
+
+        Department department = departmentRepository.findById(dto.departmentId()).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
 
         Employee entity = Employee.builder()
                 .name(dto.name())
+                .department(department)
                 .build();
 
         Employee saved = repository.save(entity);
@@ -34,9 +40,16 @@ public class EmployeeService {
         return saved.getId();
     }
     @Transactional(readOnly = true)
-    public EmployeeResponseDto findById(Long id) {
+    public EmployeeResponseDto findById(final Long id) {
         Employee entity = repository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
-        return EmployeeResponseDto.of(entity.getId(), entity.getName(), entity.getDepartment());
+        return EmployeeResponseDto.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .department(DepartmentResponseDto.builder()
+                        .id(entity.getDepartment().getId())
+                        .name(entity.getDepartment().getName())
+                        .build())
+                .build();
     }
     @Transactional(readOnly = true)
     public List<EmployeeResponseDto> findAll() {
@@ -44,12 +57,38 @@ public class EmployeeService {
         List<Employee> entities = repository.findAll();
 
         return entities.stream()
-                .map(entity -> EmployeeResponseDto.of(entity.getId(), entity.getName(), entity.getDepartment()))
+                .map(entity -> EmployeeResponseDto.builder()
+                                .id(entity.getId())
+                                .name(entity.getName())
+                                .department(DepartmentResponseDto.builder()
+                                        .id(entity.getDepartment().getId())
+                                        .name(entity.getDepartment().getName())
+                                        .build())
+                                .build()
+                )
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<EmployeeResponseDto> findByDepartment(final Long departmentId) {
+
+        List<Employee> entities = repository.findEmployeeByDepartment(departmentId);
+
+        return entities.stream()
+                .map(entity -> EmployeeResponseDto.builder()
+                                .id(entity.getId())
+                                .name(entity.getName())
+                                .department(DepartmentResponseDto.builder()
+                                            .id(entity.getDepartment().getId())
+                                            .name(entity.getDepartment().getName())
+                                            .build())
+                                .build()
+                )
                 .toList();
     }
 
     @Transactional
-    public void updateById(Long id, EmployeeRequestDto dto) {
+    public void put(Long id, EmployeePostDto dto) {
         Employee fetch = repository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
 
         Department department = departmentRepository
@@ -57,6 +96,20 @@ public class EmployeeService {
                                     .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
 
         fetch.update(dto.name(), department);
+    }
+
+    @Transactional
+    public void patch(Long id, EmployeePatchDto dto) {
+
+        Employee fetch = repository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
+
+        Optional.ofNullable(dto.name()).ifPresent(fetch::patchName);
+        Optional.ofNullable(dto.departmentId()).ifPresent(departmentId -> {
+            Department department = departmentRepository
+                    .findById(departmentId)
+                    .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
+            fetch.patchDepartment(department);
+        });
     }
 
     @Transactional

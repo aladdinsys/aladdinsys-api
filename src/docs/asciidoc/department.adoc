@@ -1,15 +1,5 @@
-:doctype: book
-:icons: font
-:source-highlighter: highlightjs
-:toc: left
-:toclevels: 2
-:sectlinks:
-:docinfo: shared-head
-
-icon:home[2x,link="/docs/index.html", float="right"]
-
-[[DUTY]]
-== Department API
+[[DepartmentAPI]]
+== 부서 API
 
 === 목록 조회
 include::{snippets}/department-controller-test/get-departments/http-request.adoc[]

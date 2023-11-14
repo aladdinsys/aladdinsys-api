@@ -23,7 +23,7 @@ public class Employee extends BaseEntity {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id")
+    @JoinColumn(name = "department_id", nullable = false, foreignKey = @ForeignKey(name = "fk_employee_department_id"))
     private Department department;
 
     @Builder
@@ -35,6 +35,14 @@ public class Employee extends BaseEntity {
 
     public void update(String name, Department department) {
         this.name = name;
+        this.department = department;
+    }
+
+    public void patchName(String name) {
+        this.name = name;
+    }
+
+    public void patchDepartment(Department department) {
         this.department = department;
     }
 

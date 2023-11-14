@@ -1,0 +1,27 @@
+[[EmployeeAPI]]
+== 직원 API
+
+=== 목록 조회
+include::{snippets}/employee-controller-test/get-employees/http-request.adoc[]
+include::{snippets}/employee-controller-test/get-employees/http-response.adoc[]
+
+=== ID로 조회
+include::{snippets}/employee-controller-test/get-employee-one/http-request.adoc[]
+include::{snippets}/employee-controller-test/get-employee-one/http-response.adoc[]
+
+=== 등록
+include::{snippets}/employee-controller-test/post/http-request.adoc[]
+include::{snippets}/employee-controller-test/post/http-response.adoc[]
+
+
+=== 수정
+include::{snippets}/employee-controller-test/put/http-request.adoc[]
+include::{snippets}/employee-controller-test/put/http-response.adoc[]
+
+=== 부서 변경
+include::{snippets}/employee-controller-test/patch/http-request.adoc[]
+include::{snippets}/employee-controller-test/patch/http-response.adoc[]
+
+=== 삭제
+include::{snippets}/employee-controller-test/delete/http-request.adoc[]
+include::{snippets}/employee-controller-test/delete/http-response.adoc[]

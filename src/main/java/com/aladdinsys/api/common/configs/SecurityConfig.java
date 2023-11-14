@@ -1,4 +1,4 @@
-package com.aladdinsys.api.common.configs.security;
+package com.aladdinsys.api.common.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
