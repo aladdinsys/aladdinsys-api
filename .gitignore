@@ -63,5 +63,5 @@ out/
 .vscode/
 
 ### REST DOC ###
-static/docs/
+**/src/main/resources/static/docs/
 

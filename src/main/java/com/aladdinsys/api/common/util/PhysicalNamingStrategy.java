@@ -3,6 +3,8 @@ package com.aladdinsys.api.common.util;
 import org.hibernate.boot.model.naming.Identifier;
 import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment;
 
+import java.util.regex.Pattern;
+
 public class PhysicalNamingStrategy implements org.hibernate.boot.model.naming.PhysicalNamingStrategy {
     @Override
     public Identifier toPhysicalCatalogName(Identifier name, JdbcEnvironment jdbcEnvironment) {
@@ -16,6 +18,7 @@ public class PhysicalNamingStrategy implements org.hibernate.boot.model.naming.P
 
     @Override
     public Identifier toPhysicalTableName(final Identifier name, JdbcEnvironment jdbcEnvironment) {
+        if(Pattern.matches("tb_.*", name.getText())) return name;
         return convertToSnakeCase(name, "tb_");
     }
 

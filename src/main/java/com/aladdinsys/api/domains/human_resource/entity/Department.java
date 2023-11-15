@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "department")
+@Table(name = "tb_department")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Department extends BaseEntity {
@@ -21,6 +21,8 @@ public class Department extends BaseEntity {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+
 
     @Builder
     public Department(Long id, String name) {
