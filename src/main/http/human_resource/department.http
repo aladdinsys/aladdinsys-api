@@ -1,5 +1,5 @@
 ### Post Request
-POST {{domain}}:{{port}}/departments
+POST {{domain}}:{{port}}/{{context-path}}/departments
 Content-Type: application/json
 
 {
@@ -7,13 +7,13 @@ Content-Type: application/json
 }
 
 ### Get Request
-GET {{domain}}:{{port}}/departments
+GET {{domain}}:{{port}}/{{context-path}}/departments
 
 ### Get One Request
-GET {{domain}}:{{port}}/departments/1
+GET {{domain}}:{{port}}/{{context-path}}/departments/1
 
 ### Put Request
-PUT {{domain}}:{{port}}/departments/2
+PUT {{domain}}:{{port}}/{{context-path}}/departments/1
 Content-Type: application/json
 
 {

@@ -1,5 +1,5 @@
 ### Post Request
-POST {{domain}}:{{port}}/employees
+POST {{domain}}:{{port}}/{{context-path}}/employees
 Content-Type: application/json
 
 {
@@ -8,16 +8,16 @@ Content-Type: application/json
 }
 
 ### Get Request
-GET {{domain}}:{{port}}/employees
+GET {{domain}}:{{port}}/{{context-path}}/employees
 
 ### Get One Request
-GET {{domain}}:{{port}}/employees/2
+GET {{domain}}:{{port}}/{{context-path}}/employees/1
 
 ### Get By Department Request
-GET {{domain}}:{{port}}/departments/2/employees
+GET {{domain}}:{{port}}/{{context-path}}/departments/1/employees
 
 ### Put Request
-PUT {{domain}}:{{port}}/employees/2
+PUT {{domain}}:{{port}}/{{context-path}}/employees/1
 Content-Type: application/json
 
 {
@@ -27,7 +27,7 @@ Content-Type: application/json
 
 
 ### Patch Request
-PATCH {{domain}}:{{port}}/employees/4
+PATCH {{domain}}:{{port}}/{{context-path}}/employees/1
 Content-Type: application/json
 
 {
@@ -36,4 +36,4 @@ Content-Type: application/json
 
 
 ### Delete Request
-DELETE {{domain}}:{{port}}/employees/1
+DELETE {{domain}}:{{port}}/{{context-path}}/employees/1
