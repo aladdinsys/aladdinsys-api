@@ -26,7 +26,7 @@ public class EmployeeService {
     private final EmployeeRepository repository;
 
     @Transactional
-    public Long save(EmployeePostDto dto) {
+    public Long save(final EmployeePostDto dto) {
 
         Department department = departmentRepository.findById(dto.departmentId()).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
 
@@ -88,7 +88,7 @@ public class EmployeeService {
     }
 
     @Transactional
-    public void put(Long id, EmployeePostDto dto) {
+    public void put(final Long id, final EmployeePostDto dto) {
         Employee fetch = repository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
 
         Department department = departmentRepository
@@ -99,7 +99,7 @@ public class EmployeeService {
     }
 
     @Transactional
-    public void patch(Long id, EmployeePatchDto dto) {
+    public void patch(final Long id, final EmployeePatchDto dto) {
 
         Employee fetch = repository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
 
@@ -113,7 +113,7 @@ public class EmployeeService {
     }
 
     @Transactional
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         repository.deleteById(id);
     }
 }

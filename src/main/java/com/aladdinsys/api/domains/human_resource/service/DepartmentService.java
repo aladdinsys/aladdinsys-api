@@ -19,7 +19,7 @@ public class DepartmentService {
     private final DepartmentRepository repository;
 
     @Transactional
-    public Long save(DepartmentRequestDto dto) {
+    public Long save(final DepartmentRequestDto dto) {
 
         Department entity = Department.builder()
                 .name(dto.name())
@@ -30,7 +30,7 @@ public class DepartmentService {
         return saved.getId();
     }
     @Transactional(readOnly = true)
-    public DepartmentResponseDto findById(Long id) {
+    public DepartmentResponseDto findById(final Long id) {
         Department entity = repository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
         return DepartmentResponseDto.of(entity.getId(), entity.getName());
     }
@@ -45,13 +45,13 @@ public class DepartmentService {
     }
 
     @Transactional
-    public void updateById(Long id, DepartmentRequestDto dto) {
+    public void updateById(final Long id, final DepartmentRequestDto dto) {
         Department fetch = repository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
         fetch.update(dto.name());
     }
 
     @Transactional
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         repository.deleteById(id);
     }
 
