@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class DistrictService {
@@ -19,14 +21,29 @@ public class DistrictService {
     public DistrictResponseDto findById(final Long id) {
         District entity = repository.findDistrictById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
         return DistrictResponseDto.builder()
-                        .id(entity.getId())
-                        .yearValue(entity.getYearValue())
-                        .regionName(entity.getRegionName())
-                        .districtName(entity.getDistrictName())
-                        .itemName(entity.getItemName())
-                        .dataValue(entity.getDataValue())
-                        .build();
+                .id(entity.getId())
+                .yearValue(entity.getYearValue())
+                .regionName(entity.getRegionName())
+                .districtName(entity.getDistrictName())
+                .itemName(entity.getItemName())
+                .dataValue(entity.getDataValue())
+                .build();
 
+    }
+
+    @Transactional
+    public List<DistrictResponseDto> findAll() {
+        List<District> entites = repository.findAll();
+
+        return entites.stream()
+                .map(entity -> DistrictResponseDto.of(
+                        entity.getId(),
+                        entity.getYearValue(),
+                        entity.getRegionName(),
+                        entity.getDistrictName(),
+                        entity.getItemName(),
+                        entity.getDataValue()))
+                .toList();
     }
 
 }
