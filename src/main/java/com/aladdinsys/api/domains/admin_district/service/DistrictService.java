@@ -2,6 +2,7 @@ package com.aladdinsys.api.domains.admin_district.service;
 
 import com.aladdinsys.api.common.constant.ErrorCode;
 import com.aladdinsys.api.common.exception.CustomException;
+import com.aladdinsys.api.domains.admin_district.dto.DistrictPostDto;
 import com.aladdinsys.api.domains.admin_district.dto.DistrictResponseDto;
 import com.aladdinsys.api.domains.admin_district.entity.District;
 import com.aladdinsys.api.domains.admin_district.repository.DistrictRepository;
@@ -22,11 +23,11 @@ public class DistrictService {
         District entity = repository.findDistrictById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
         return DistrictResponseDto.builder()
                 .id(entity.getId())
-                .yearValue(entity.getYearValue())
-                .regionName(entity.getRegionName())
-                .districtName(entity.getDistrictName())
-                .itemName(entity.getItemName())
-                .dataValue(entity.getDataValue())
+                .stdYy(entity.getStdYy())
+                .signguNm(entity.getSignguNm())
+                .adstrdNm(entity.getAdstrdNm())
+                .iemNm(entity.getAdstrdNm())
+                .dataVal(entity.getIemNm())
                 .build();
 
     }
@@ -38,12 +39,25 @@ public class DistrictService {
         return entites.stream()
                 .map(entity -> DistrictResponseDto.of(
                         entity.getId(),
-                        entity.getYearValue(),
-                        entity.getRegionName(),
-                        entity.getDistrictName(),
-                        entity.getItemName(),
-                        entity.getDataValue()))
+                        entity.getStdYy(),
+                        entity.getSignguNm(),
+                        entity.getAdstrdNm(),
+                        entity.getAdstrdNm(),
+                        entity.getIemNm()))
                 .toList();
+    }
+
+    @Transactional
+    public Long save(final DistrictPostDto dto) {
+        District entity = District.builder()
+                .stdYy(dto.stdYy())
+                .signguNm(dto.signguNm())
+                .adstrdNm(dto.adstrdNm())
+                .iemNm(dto.iemNm())
+                .dataVal(dto.dataVal())
+                .build();
+        District saved = repository.save(entity);
+        return saved.getId();
     }
 
 }
