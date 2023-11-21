@@ -3,6 +3,7 @@ package com.aladdinsys.api.domains.admin_district.controller;
 import com.aladdinsys.api.common.constant.SuccessCode;
 import com.aladdinsys.api.common.response.DataResponseBody;
 import com.aladdinsys.api.common.response.ResponseBody;
+import com.aladdinsys.api.domains.admin_district.dto.DistrictPatchDto;
 import com.aladdinsys.api.domains.admin_district.dto.DistrictPostDto;
 import com.aladdinsys.api.domains.admin_district.dto.DistrictResponseDto;
 import com.aladdinsys.api.domains.admin_district.service.DistrictService;
@@ -13,8 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-import static com.aladdinsys.api.common.constant.SuccessCode.SUCCESS_DELETE;
-import static com.aladdinsys.api.common.constant.SuccessCode.SUCCESS_PUT;
+import static com.aladdinsys.api.common.constant.SuccessCode.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -53,6 +53,14 @@ public class DistrictController {
         service.put(id, dto);
         return ResponseBody.of(SUCCESS_PUT);
     }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseBody patch(@PathVariable Long id, @Valid @RequestBody DistrictPatchDto dto) {
+        service.patch(id, dto);
+        return ResponseBody.of(SUCCESS_PATCH);
+    }
+
 
 
 }

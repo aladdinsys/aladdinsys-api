@@ -23,7 +23,7 @@ public class District extends BaseEntity {
     private Long id;
 
     @Column(name = "std_yy", nullable = false)
-    private Integer stdYy;
+    private String stdYy;
 
     @Column(name = "signgu_nm", nullable = false)
     private String signguNm;
@@ -38,7 +38,7 @@ public class District extends BaseEntity {
     private String dataVal;
 
     @Builder
-    public District(Long id, Integer stdYy, String signguNm, String adstrdNm, String iemNm, String dataVal) {
+    public District(Long id, String stdYy, String signguNm, String adstrdNm, String iemNm, String dataVal) {
         this.id = id;
         this.stdYy = stdYy;
         this.signguNm = signguNm;
@@ -47,11 +47,31 @@ public class District extends BaseEntity {
         this.dataVal = dataVal;
     }
 
-    public void update(Integer stdYy, String signguNm, String adstrdNm, String iemNm, String dataVal) {
+    public void update(String stdYy, String signguNm, String adstrdNm, String iemNm, String dataVal) {
         this.stdYy = stdYy;
         this.signguNm = signguNm;
         this.adstrdNm = adstrdNm;
         this.iemNm = iemNm;
+        this.dataVal = dataVal;
+    }
+
+    public void patchStdYy(String stdYy) {
+        this.stdYy = stdYy;
+    }
+
+    public void patchSignguNm(String signguNm) {
+        this.signguNm = signguNm;
+    }
+
+    public void patchAdstrdNm(String adstrdNm) {
+        this.adstrdNm = adstrdNm;
+    }
+
+    public void patchIemNm(String iemNm) {
+        this.iemNm = iemNm;
+    }
+
+    public void patchDataVal(String dataVal) {
         this.dataVal = dataVal;
     }
 

@@ -5,13 +5,13 @@ import lombok.Builder;
 @Builder
 public record DistrictResponseDto(
         Long id,
-        Integer stdYy,
+        String stdYy,
         String signguNm,
         String adstrdNm,
         String iemNm,
         String dataVal
 ) {
-    public static DistrictResponseDto of(Long id, Integer stdYy, String signguNm, String adstrdNm, String iemNm, String dataVal) {
+    public static DistrictResponseDto of(Long id, String stdYy, String signguNm, String adstrdNm, String iemNm, String dataVal) {
         return new DistrictResponseDto(id, stdYy, signguNm, adstrdNm, iemNm, dataVal);
     }
 }

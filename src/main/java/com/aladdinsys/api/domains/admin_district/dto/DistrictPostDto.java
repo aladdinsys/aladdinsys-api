@@ -7,7 +7,7 @@ import javax.validation.constraints.Pattern;
 public record DistrictPostDto (
 
     @NotNull(message = "연도는 필수입니다.")
-    Integer stdYy,
+    String stdYy,
 
     @NotNull(message = "시군구는 필수입니다.")
     @NotBlank(message = "시군구는 공백이 될 수 없습니다.")

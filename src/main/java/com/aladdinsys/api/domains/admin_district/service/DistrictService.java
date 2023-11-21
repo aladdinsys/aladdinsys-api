@@ -2,6 +2,7 @@ package com.aladdinsys.api.domains.admin_district.service;
 
 import com.aladdinsys.api.common.constant.ErrorCode;
 import com.aladdinsys.api.common.exception.CustomException;
+import com.aladdinsys.api.domains.admin_district.dto.DistrictPatchDto;
 import com.aladdinsys.api.domains.admin_district.dto.DistrictPostDto;
 import com.aladdinsys.api.domains.admin_district.dto.DistrictResponseDto;
 import com.aladdinsys.api.domains.admin_district.entity.District;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -70,6 +72,18 @@ public class DistrictService {
         District fetch = repository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
 
         fetch.update(dto.stdYy(), dto.signguNm(), dto.iemNm(), dto.adstrdNm(), dto.dataVal());
+    }
+
+    @Transactional
+    public void patch(final Long id, final DistrictPatchDto dto) {
+        District fetch = repository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
+
+        Optional.ofNullable(dto.stdYy()).ifPresent(fetch::patchStdYy);
+        Optional.ofNullable(dto.signguNm()).ifPresent(fetch::patchSignguNm);
+        Optional.ofNullable(dto.adstrdNm()).ifPresent(fetch::patchAdstrdNm);
+        Optional.ofNullable(dto.iemNm()).ifPresent(fetch::patchIemNm);
+        Optional.ofNullable(dto.dataVal()).ifPresent(fetch::patchDataVal);
+
     }
 
 }
