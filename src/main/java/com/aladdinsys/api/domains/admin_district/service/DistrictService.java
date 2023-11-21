@@ -60,4 +60,9 @@ public class DistrictService {
         return saved.getId();
     }
 
+    @Transactional
+    public void deleteById(final Long id) {
+        repository.deleteById(id);
+    }
+
 }
