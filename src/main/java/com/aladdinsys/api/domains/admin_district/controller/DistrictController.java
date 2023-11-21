@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 import static com.aladdinsys.api.common.constant.SuccessCode.SUCCESS_DELETE;
+import static com.aladdinsys.api.common.constant.SuccessCode.SUCCESS_PUT;
 
 @RestController
 @RequiredArgsConstructor
@@ -44,6 +45,13 @@ public class DistrictController {
     public ResponseBody delete(@PathVariable Long id) {
         service.deleteById(id);
         return ResponseBody.of(SUCCESS_DELETE);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseBody put(@PathVariable Long id, @Valid @RequestBody DistrictPostDto dto) {
+        service.put(id, dto);
+        return ResponseBody.of(SUCCESS_PUT);
     }
 
 

@@ -65,4 +65,11 @@ public class DistrictService {
         repository.deleteById(id);
     }
 
+    @Transactional
+    public void put(final Long id, final DistrictPostDto dto) {
+        District fetch = repository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
+
+        fetch.update(dto.stdYy(), dto.signguNm(), dto.iemNm(), dto.adstrdNm(), dto.dataVal());
+    }
+
 }
