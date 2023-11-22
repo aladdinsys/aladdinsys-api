@@ -270,7 +270,7 @@ class AdministrativeDistrictControllerTest {
 
         AdministrativeDistrictResponseDto afterPatch = service.findById(responseDto.id());
 
-        assertThat(afterPatch.itemName()).isEqualTo("1234");
+        assertThat(afterPatch.itemName()).isEqualTo("법정동수 (개)");
         assertThat(afterPatch.dataValue()).isEqualTo("1234");
 
     }
