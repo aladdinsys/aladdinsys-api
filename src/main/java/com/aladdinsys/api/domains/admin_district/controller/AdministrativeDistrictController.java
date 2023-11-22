@@ -3,10 +3,10 @@ package com.aladdinsys.api.domains.admin_district.controller;
 import com.aladdinsys.api.common.constant.SuccessCode;
 import com.aladdinsys.api.common.response.DataResponseBody;
 import com.aladdinsys.api.common.response.ResponseBody;
-import com.aladdinsys.api.domains.admin_district.dto.DistrictPatchDto;
-import com.aladdinsys.api.domains.admin_district.dto.DistrictPostDto;
-import com.aladdinsys.api.domains.admin_district.dto.DistrictResponseDto;
-import com.aladdinsys.api.domains.admin_district.service.DistrictService;
+import com.aladdinsys.api.domains.admin_district.dto.AdministrativeDistrictPatchDto;
+import com.aladdinsys.api.domains.admin_district.dto.AdministrativeDistrictPostDto;
+import com.aladdinsys.api.domains.admin_district.dto.AdministrativeDistrictResponseDto;
+import com.aladdinsys.api.domains.admin_district.service.AdministrativeDistrictService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,25 +18,25 @@ import static com.aladdinsys.api.common.constant.SuccessCode.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/district")
-public class DistrictController {
+@RequestMapping("/districts")
+public class AdministrativeDistrictController {
 
 
-   private final DistrictService service;
+   private final AdministrativeDistrictService service;
 
     @GetMapping("/{id}")
-    public DataResponseBody<DistrictResponseDto> getDistrict(@PathVariable Long id) {
+    public DataResponseBody<AdministrativeDistrictResponseDto> getDistrict(@PathVariable Long id) {
         return DataResponseBody.of(service.findById(id));
     }
 
     @GetMapping
-    public DataResponseBody<List<DistrictResponseDto>> getDistricts() {
+    public DataResponseBody<List<AdministrativeDistrictResponseDto>> getDistricts() {
         return DataResponseBody.of(service.findAll());
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DataResponseBody<Long> post(@Valid @RequestBody DistrictPostDto dto) {
+    public DataResponseBody<Long> post(@Valid @RequestBody AdministrativeDistrictPostDto dto) {
         return DataResponseBody.of(SuccessCode.SUCCESS_CREATE, service.save(dto));
     }
 
@@ -49,14 +49,14 @@ public class DistrictController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseBody put(@PathVariable Long id, @Valid @RequestBody DistrictPostDto dto) {
+    public ResponseBody put(@PathVariable Long id, @Valid @RequestBody AdministrativeDistrictPostDto dto) {
         service.put(id, dto);
         return ResponseBody.of(SUCCESS_PUT);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseBody patch(@PathVariable Long id, @Valid @RequestBody DistrictPatchDto dto) {
+    public ResponseBody patch(@PathVariable Long id, @Valid @RequestBody AdministrativeDistrictPatchDto dto) {
         service.patch(id, dto);
         return ResponseBody.of(SUCCESS_PATCH);
     }
