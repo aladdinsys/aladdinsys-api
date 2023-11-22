@@ -22,7 +22,7 @@ public class AdministrativeDistrictService {
 
     @Transactional(readOnly = true)
     public AdministrativeDistrictResponseDto findById(final Long id) {
-        AdministrativeDistrict entity = repository.findDistrictById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
+        AdministrativeDistrict entity = repository.findAdministrativeDistrictById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
         return AdministrativeDistrictResponseDto.builder()
                 .id(entity.getId())
                 .standardYear(entity.getStandardYear())

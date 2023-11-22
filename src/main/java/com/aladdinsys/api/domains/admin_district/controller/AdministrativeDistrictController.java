@@ -25,12 +25,12 @@ public class AdministrativeDistrictController {
    private final AdministrativeDistrictService service;
 
     @GetMapping("/{id}")
-    public DataResponseBody<AdministrativeDistrictResponseDto> getDistrict(@PathVariable Long id) {
+    public DataResponseBody<AdministrativeDistrictResponseDto> getAdministrativeDistrict(@PathVariable Long id) {
         return DataResponseBody.of(service.findById(id));
     }
 
     @GetMapping
-    public DataResponseBody<List<AdministrativeDistrictResponseDto>> getDistricts() {
+    public DataResponseBody<List<AdministrativeDistrictResponseDto>> getAdministrativeDistricts() {
         return DataResponseBody.of(service.findAll());
     }
 

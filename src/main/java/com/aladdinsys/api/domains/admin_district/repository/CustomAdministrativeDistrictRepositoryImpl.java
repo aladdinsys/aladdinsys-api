@@ -14,7 +14,7 @@ public class CustomAdministrativeDistrictRepositoryImpl implements CustomAdminis
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public Optional<AdministrativeDistrict> findDistrictById(Long id) {
+    public Optional<AdministrativeDistrict> findAdministrativeDistrictById(Long id) {
         AdministrativeDistrict district = queryFactory
                 .select(QAdministrativeDistrict.administrativeDistrict)
                 .from(QAdministrativeDistrict.administrativeDistrict)
