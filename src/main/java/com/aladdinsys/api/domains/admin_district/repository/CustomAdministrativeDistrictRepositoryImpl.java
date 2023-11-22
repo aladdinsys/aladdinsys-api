@@ -24,6 +24,24 @@ public class CustomAdministrativeDistrictRepositoryImpl implements CustomAdminis
         return Optional.ofNullable(district);
     }
 
+    @Override
+    public Optional<AdministrativeDistrict> findAdministrativeDistrictByColumns(String standardYear, String cityCountyDistrictName, String administrationName, String itemName, String dataValue) {
+
+        AdministrativeDistrict district = queryFactory
+                .select(QAdministrativeDistrict.administrativeDistrict)
+                .from(QAdministrativeDistrict.administrativeDistrict)
+                .where(
+                        QAdministrativeDistrict.administrativeDistrict.standardYear.eq(standardYear)
+                                .and(QAdministrativeDistrict.administrativeDistrict.cityCountyDistrictName.eq(cityCountyDistrictName))
+                                .and(QAdministrativeDistrict.administrativeDistrict.administrationName.eq(administrationName))
+                                .and(QAdministrativeDistrict.administrativeDistrict.itemName.eq(itemName))
+                                .and(QAdministrativeDistrict.administrativeDistrict.dataValue.eq(dataValue))
+                )
+                .fetchOne();
+
+        return Optional.ofNullable(district);
+    }
+
 }
 
 

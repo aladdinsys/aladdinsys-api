@@ -58,6 +58,12 @@ public class AdministrativeDistrictService {
                 .itemName(dto.itemName())
                 .dataValue(dto.dataValue())
                 .build();
+
+        repository.findAdministrativeDistrictByColumns(dto.standardYear(), dto.cityCountyDistrictName(), dto.administrationName(), dto.itemName(), dto.dataValue())
+                        .ifPresent(district -> {
+                            throw new CustomException(ErrorCode.DUPLICATE);
+                        });
+
         AdministrativeDistrict saved = repository.save(entity);
         return saved.getId();
     }

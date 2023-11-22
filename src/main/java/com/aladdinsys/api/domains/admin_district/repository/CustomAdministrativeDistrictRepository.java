@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface CustomAdministrativeDistrictRepository {
     Optional<AdministrativeDistrict> findAdministrativeDistrictById(Long id);
+    Optional<AdministrativeDistrict> findAdministrativeDistrictByColumns(String standardYear, String cityCountyDistrictName, String administrationName, String itemName, String dataValue);
 }
