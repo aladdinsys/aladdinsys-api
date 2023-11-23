@@ -4,20 +4,20 @@ import lombok.Builder;
 
 @Builder
 public record ExerciseResponseDto(
-        Long Id,
-        String stdYy,
+        Long id,
+        String standardYear,
         String largeExerciseFacility,
         String middleExerciseFacility,
-        String itemNm,
+        String itemName,
         String dataValue
 ) {
-    public static ExerciseResponseDto of(Long Id,
-                                         String stdYy,
+    public static ExerciseResponseDto of(Long id,
+                                         String standardYear,
                                          String largeExerciseFacility,
                                          String middleExerciseFacility,
-                                         String itemNm,
+                                         String itemName,
                                          String dataValue
     ) {
-        return new ExerciseResponseDto(Id, stdYy, largeExerciseFacility, middleExerciseFacility, itemNm, dataValue);
+        return new ExerciseResponseDto(id, standardYear, largeExerciseFacility, middleExerciseFacility, itemName, dataValue);
     }
 }

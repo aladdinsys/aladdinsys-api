@@ -9,66 +9,68 @@ import javax.persistence.*;
 
 @Getter
 @Entity
-@Table(name = "tb_exercise")
+@Table(name = "tb_exercise",  uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"standard_year", "large_exercise_facility", "middle_exercise_facility", "item_name"})
+})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ExerciseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    public Long Id;
+    public Long id;
 
-    @Column(name = "std_yy", nullable = false, length = 4)
-    public String stdYy;
+    @Column(name = "standard_year", nullable = false)
+    public String standardYear;
 
-    @Column(name = "phsrtn_fclty_lclas_nm", nullable = false, length = 20)
+    @Column(name = "large_exercise_facility", nullable = false)
     public String largeExerciseFacility;
 
-    @Column(name = "phsrtn_fclty_mclas_nm", nullable = false, length = 20)
+    @Column(name = "middle_exercise_facility", nullable = false)
     public String middleExerciseFacility;
 
-    @Column(name = "iem_nm", nullable = false, length = 20)
-    public String itemNm;
+    @Column(name = "item_name", nullable = false)
+    public String itemName;
 
-    @Column(name = "data_val", nullable = false, length = 20)
+    @Column(name = "data_value", nullable = false)
     public String dataValue;
 
     @Builder
-    public ExerciseEntity(Long Id,
-                          String stdYy,
+    public ExerciseEntity(Long id,
+                          String standardYear,
                           String largeExerciseFacility,
                           String middleExerciseFacility,
-                          String itemNm,
+                          String itemName,
                           String dataValue
     ){
-        this.Id = Id;
-        this.stdYy = stdYy;
+        this.id = id;
+        this.standardYear = standardYear;
         this.largeExerciseFacility = largeExerciseFacility;
         this.middleExerciseFacility = middleExerciseFacility;
-        this.itemNm = itemNm;
+        this.itemName = itemName;
         this.dataValue = dataValue;
     }
 
-    public void update(String stdYy,
+    public void update(String standardYear,
                        String largeExerciseFacility,
                        String middleExerciseFacility,
-                       String itemNm,
+                       String itemName,
                        String dataValue
     ) {
-        this.stdYy = stdYy;
+        this.standardYear = standardYear;
         this.largeExerciseFacility = largeExerciseFacility;
         this.middleExerciseFacility = middleExerciseFacility;
-        this.itemNm = itemNm;
+        this.itemName = itemName;
         this.dataValue = dataValue;
     }
 
-    public void patchStdYy(String stdYy) {this.stdYy = stdYy;}
+    public void patchStdYy(String standardYear) {this.standardYear = standardYear;}
 
     public void patchLargeExerciseFacility(String largeExerciseFacility) {this.largeExerciseFacility = largeExerciseFacility;}
 
     public void patchMiddleExerciseFacility(String middleExerciseFacility) {this.middleExerciseFacility = middleExerciseFacility;}
 
-    public void patchItemNm(String itemNm) {this.itemNm = itemNm;}
+    public void patchItemNm(String itemName) {this.itemName = itemName;}
 
     public void patchDataValue(String dataValue) {this.dataValue = dataValue;}
 

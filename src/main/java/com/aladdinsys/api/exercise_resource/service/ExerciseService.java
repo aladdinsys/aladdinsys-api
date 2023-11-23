@@ -23,21 +23,21 @@ public class ExerciseService {
     @Transactional
     public Long save(final ExercisePostDto dto){
         ExerciseEntity entity = ExerciseEntity.builder()
-                .stdYy(dto.stdYy())
+                .standardYear(dto.standardYear())
                 .largeExerciseFacility(dto.largeExerciseFacility())
                 .middleExerciseFacility(dto.middleExerciseFacility())
-                .itemNm(dto.itemNm())
+                .itemName(dto.itemName())
                 .dataValue(dto.dataValue())
                 .build();
 
         ExerciseEntity saved = repository.save(entity);
-        return saved.Id();
+        return saved.getId();
     }
 
     @Transactional(readOnly = true)
-    public ExerciseResponseDto findById(final Long Id) {
-        ExerciseEntity entity = repository.findById(Id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
-        return ExerciseResponseDto.of(entity.getId(), entity.getStdYy(), entity.getLargeExerciseFacility(), entity.getMiddleExerciseFacility(), entity.getItemNm(), entity.getDataValue());
+    public ExerciseResponseDto findById(final Long id) {
+        ExerciseEntity entity = repository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
+        return ExerciseResponseDto.of(entity.getId(), entity.getStandardYear(), entity.getLargeExerciseFacility(), entity.getMiddleExerciseFacility(), entity.getItemName(), entity.getDataValue());
     }
 
     @Transactional
@@ -45,30 +45,30 @@ public class ExerciseService {
         List<ExerciseEntity> entities = repository.findAll();
 
         return entities.stream()
-                .map(entity -> ExerciseResponseDto.of(entity.getId(), entity.getStdYy(), entity.getLargeExerciseFacility(), entity.getMiddleExerciseFacility(), entity.getItemNm(), entity.getDataValue()))
+                .map(entity -> ExerciseResponseDto.of(entity.getId(), entity.getStandardYear(), entity.getLargeExerciseFacility(), entity.getMiddleExerciseFacility(), entity.getItemName(), entity.getDataValue()))
                 .toList();
     }
 
     @Transactional
-    public void updateExercise(final Long Id, final ExercisePostDto dto){
-        ExerciseEntity fetch = repository.findById(Id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
-        fetch.update(dto.stdYy(), dto.largeExerciseFacility(), dto.middleExerciseFacility(), dto.itemNm(), dto.dataValue());
+    public void updateExercise(final Long id, final ExercisePostDto dto){
+        ExerciseEntity fetch = repository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
+        fetch.update(dto.standardYear(), dto.largeExerciseFacility(), dto.middleExerciseFacility(), dto.itemName(), dto.dataValue());
     }
 
     @Transactional
-    public void patchExercise(final Long Id, final ExercisePatchDto dto){
-        ExerciseEntity fetch = repository.findById(Id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
+    public void patchExercise(final Long id, final ExercisePatchDto dto){
+        ExerciseEntity fetch = repository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
 
-        Optional.ofNullable(dto.stdYy()).ifPresent(fetch::patchStdYy);
+        Optional.ofNullable(dto.standardYear()).ifPresent(fetch::patchStdYy);
         Optional.ofNullable(dto.largeExerciseFacility()).ifPresent(fetch::patchLargeExerciseFacility);
         Optional.ofNullable(dto.middleExerciseFacility()).ifPresent(fetch::patchMiddleExerciseFacility);
-        Optional.ofNullable(dto.itemNm()).ifPresent(fetch::patchItemNm);
+        Optional.ofNullable(dto.itemName()).ifPresent(fetch::patchItemNm);
         Optional.ofNullable(dto.dataValue()).ifPresent(fetch::patchDataValue);
     }
 
     @Transactional
-    public void deleteExercise(final Long Id){
-        repository.deleteById(Id);
+    public void deleteExercise(final Long id){
+        repository.deleteById(id);
     }
 
 }

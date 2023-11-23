@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 
 public record ExercisePostDto(
         @NotNull(message = "년도는 필수 입니다.")
-        String stdYy,
+        String standardYear,
 
         @NotNull(message = "대분류는 필수 입니다.")
         String largeExerciseFacility,
@@ -13,13 +13,13 @@ public record ExercisePostDto(
         String middleExerciseFacility,
 
         @NotNull(message = "항목은 필수 입니다.")
-        String itemNm,
+        String itemName,
 
         @NotNull(message = "값은 필수 입니다.")
         String dataValue
 ) {
         public ExercisePostDto {
-                if (stdYy == null) {
+                if (standardYear == null) {
                     throw new IllegalArgumentException("must not be null");
                 }
                 if (largeExerciseFacility == null) {
@@ -28,7 +28,7 @@ public record ExercisePostDto(
                 if (middleExerciseFacility == null) {
                         throw new IllegalArgumentException("must not be null");
                 }
-                if (itemNm == null) {
+                if (itemName == null) {
                         throw new IllegalArgumentException("must not be null");
                 }
                 if (dataValue == null) {

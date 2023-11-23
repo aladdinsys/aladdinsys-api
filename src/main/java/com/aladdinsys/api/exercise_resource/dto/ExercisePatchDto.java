@@ -5,11 +5,11 @@ import lombok.Builder;
 @Builder
 public record ExercisePatchDto(
 
-        Long Id,
-        String stdYy,
+        Long id,
+        String standardYear,
         String largeExerciseFacility,
         String middleExerciseFacility,
-        String itemNm,
+        String itemName,
         String dataValue
 ) {
 }
