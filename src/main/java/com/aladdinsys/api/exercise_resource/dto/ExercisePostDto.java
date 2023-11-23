@@ -7,31 +7,31 @@ public record ExercisePostDto(
         String stdYy,
 
         @NotNull(message = "대분류는 필수 입니다.")
-        String phsrtnFcltyLclasNm,
+        String largeExerciseFacility,
 
         @NotNull(message = "중분류는 필수 입니다.")
-        String phsrtnFcltyMclasNm,
+        String middleExerciseFacility,
 
         @NotNull(message = "항목은 필수 입니다.")
-        String iemNm,
+        String itemNm,
 
         @NotNull(message = "값은 필수 입니다.")
-        String dataVal
+        String dataValue
 ) {
         public ExercisePostDto {
                 if (stdYy == null) {
                     throw new IllegalArgumentException("must not be null");
                 }
-                if (phsrtnFcltyLclasNm == null) {
+                if (largeExerciseFacility == null) {
                         throw new IllegalArgumentException("must not be null");
                 }
-                if (phsrtnFcltyMclasNm == null) {
+                if (middleExerciseFacility == null) {
                         throw new IllegalArgumentException("must not be null");
                 }
-                if (iemNm == null) {
+                if (itemNm == null) {
                         throw new IllegalArgumentException("must not be null");
                 }
-                if (dataVal == null) {
+                if (dataValue == null) {
                         throw new IllegalArgumentException("must not be null");
                 }
         }

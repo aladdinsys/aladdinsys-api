@@ -74,12 +74,12 @@ class ExerciseControllerTest{
         List<ExerciseResponseDto> districts = service.findAll();
         ExerciseResponseDto dto = districts.get(0);
 
-        int dataId = dto.dataId().intValue();
+        int Id = dto.Id().intValue();
         String stdYy = dto.stdYy();
-        String phsrtnFcltyLclasNm = dto.phsrtnFcltyLclasNm();
-        String phsrtnFcltyMclasNm = dto.phsrtnFcltyMclasNm();
-        String iemNm = dto.iemNm();
-        String dataVal = dto.dataVal();
+        String largeExerciseFacility = dto.largeExerciseFacility();
+        String middleExerciseFacility = dto.middleExerciseFacility();
+        String itemNm = dto.itemNm();
+        String dataValue = dto.dataValue();
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/exercise")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -92,37 +92,37 @@ class ExerciseControllerTest{
                                 fieldWithPath("timestamp").type(JsonFieldType.STRING).description("시간"),
                                 fieldWithPath("status").type(JsonFieldType.STRING).description("상태"),
                                 fieldWithPath("message").type(JsonFieldType.STRING).description("메세지"),
-                                fieldWithPath("result[].dataId").type(JsonFieldType.NUMBER).description("아이디"),
+                                fieldWithPath("result[].Id").type(JsonFieldType.NUMBER).description("아이디"),
                                 fieldWithPath("result[].stdYy").type(JsonFieldType.STRING).description("기준년도"),
-                                fieldWithPath("result[].phsrtnFcltyLclasNm").type(JsonFieldType.STRING).description("대분류"),
-                                fieldWithPath("result[].phsrtnFcltyMclasNm").type(JsonFieldType.STRING).description("중분류"),
-                                fieldWithPath("result[].iemNm").type(JsonFieldType.STRING).description("항목명"),
-                                fieldWithPath("result[].dataVal").type(JsonFieldType.STRING).description("데이터 값")
+                                fieldWithPath("result[].largeExerciseFacility").type(JsonFieldType.STRING).description("대분류"),
+                                fieldWithPath("result[].middleExerciseFacility").type(JsonFieldType.STRING).description("중분류"),
+                                fieldWithPath("result[].itemNm").type(JsonFieldType.STRING).description("항목명"),
+                                fieldWithPath("result[].dataValue").type(JsonFieldType.STRING).description("데이터 값")
                         )
                 ))
                 .andReturn();
 
         String jsonResponse = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
 
-        assertThat(JsonPath.<Integer>read(jsonResponse, "$.result[0].dataId")).isEqualTo(dataId);
+        assertThat(JsonPath.<Integer>read(jsonResponse, "$.result[0].Id")).isEqualTo(Id);
         assertThat(JsonPath.<String>read(jsonResponse, "$.result[0].stdYy")).isEqualTo(stdYy);
-        assertThat(JsonPath.<String>read(jsonResponse, "$.result[0].phsrtnFcltyLclasNm")).isEqualTo(phsrtnFcltyLclasNm);
-        assertThat(JsonPath.<String>read(jsonResponse, "$.result[0].phsrtnFcltyMclasNm")).isEqualTo(phsrtnFcltyMclasNm);
-        assertThat(JsonPath.<String>read(jsonResponse, "$.result[0].iemNm")).isEqualTo(iemNm);
-        assertThat(JsonPath.<String>read(jsonResponse, "$.result[0].dataVal")).isEqualTo(dataVal);
+        assertThat(JsonPath.<String>read(jsonResponse, "$.result[0].largeExerciseFacility")).isEqualTo(largeExerciseFacility);
+        assertThat(JsonPath.<String>read(jsonResponse, "$.result[0].middleExerciseFacility")).isEqualTo(middleExerciseFacility);
+        assertThat(JsonPath.<String>read(jsonResponse, "$.result[0].itemNm")).isEqualTo(itemNm);
+        assertThat(JsonPath.<String>read(jsonResponse, "$.result[0].dataValue")).isEqualTo(dataValue);
     }
 
     @Test
-    @DisplayName("GET /exercise/{dataId}")
+    @DisplayName("GET /exercise/{Id}")
     void getAdministrativeDistrictOne() throws Exception {
-        int dataId = service.findAll().get(0).dataId().intValue();
+        int Id = service.findAll().get(0).Id().intValue();
         String stdYy = service.findAll().get(0).stdYy();
-        String phsrtnFcltyLclasNm = service.findAll().get(0).phsrtnFcltyLclasNm();
-        String phsrtnFcltyMclasNm = service.findAll().get(0).phsrtnFcltyMclasNm();
-        String iemNm = service.findAll().get(0).iemNm();
-        String dataVal = service.findAll().get(0).dataVal();
+        String largeExerciseFacility = service.findAll().get(0).largeExerciseFacility();
+        String middleExerciseFacility = service.findAll().get(0).middleExerciseFacility();
+        String itemNm = service.findAll().get(0).itemNm();
+        String dataValue = service.findAll().get(0).dataValue();
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/exercise/{dataId}", dataId)
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/exercise/{Id}", Id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.result").exists())
@@ -133,28 +133,28 @@ class ExerciseControllerTest{
                                 fieldWithPath("timestamp").type(JsonFieldType.STRING).description("시간"),
                                 fieldWithPath("status").type(JsonFieldType.STRING).description("상태"),
                                 fieldWithPath("message").type(JsonFieldType.STRING).description("메세지"),
-                                fieldWithPath("result.dataId").type(JsonFieldType.NUMBER).description("아이디"),
+                                fieldWithPath("result.Id").type(JsonFieldType.NUMBER).description("아이디"),
                                 fieldWithPath("result.stdYy").type(JsonFieldType.STRING).description("기준년도"),
-                                fieldWithPath("result.phsrtnFcltyLclasNm").type(JsonFieldType.STRING).description("대분류"),
-                                fieldWithPath("result.phsrtnFcltyMclasNm").type(JsonFieldType.STRING).description("중분류"),
-                                fieldWithPath("result.iemNm").type(JsonFieldType.STRING).description("항목명"),
-                                fieldWithPath("result.dataVal").type(JsonFieldType.STRING).description("데이터 값")
+                                fieldWithPath("result.largeExerciseFacility").type(JsonFieldType.STRING).description("대분류"),
+                                fieldWithPath("result.middleExerciseFacility").type(JsonFieldType.STRING).description("중분류"),
+                                fieldWithPath("result.itemNm").type(JsonFieldType.STRING).description("항목명"),
+                                fieldWithPath("result.dataValue").type(JsonFieldType.STRING).description("데이터 값")
                         )
                 ))
                 .andReturn();
 
         String jsonResponse = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
 
-        assertThat(JsonPath.<Integer>read(jsonResponse, "$.result.dataId")).isEqualTo(dataId);
+        assertThat(JsonPath.<Integer>read(jsonResponse, "$.result.Id")).isEqualTo(Id);
         assertThat(JsonPath.<String>read(jsonResponse, "$.result.stdYy")).isEqualTo(stdYy);
-        assertThat(JsonPath.<String>read(jsonResponse, "$.result.phsrtnFcltyLclasNm")).isEqualTo(phsrtnFcltyLclasNm);
-        assertThat(JsonPath.<String>read(jsonResponse, "$.result.phsrtnFcltyMclasNm")).isEqualTo(phsrtnFcltyMclasNm);
-        assertThat(JsonPath.<String>read(jsonResponse, "$.result.iemNm")).isEqualTo(iemNm);
-        assertThat(JsonPath.<String>read(jsonResponse, "$.result.dataVal")).isEqualTo(dataVal);
+        assertThat(JsonPath.<String>read(jsonResponse, "$.result.largeExerciseFacility")).isEqualTo(largeExerciseFacility);
+        assertThat(JsonPath.<String>read(jsonResponse, "$.result.middleExerciseFacility")).isEqualTo(middleExerciseFacility);
+        assertThat(JsonPath.<String>read(jsonResponse, "$.result.itemNm")).isEqualTo(itemNm);
+        assertThat(JsonPath.<String>read(jsonResponse, "$.result.dataValue")).isEqualTo(dataValue);
     }
 
     @Test
-    @DisplayName("POST /exercise/{dataId}")
+    @DisplayName("POST /exercise/{Id}")
     void post() throws Exception {
 
         ExercisePostDto postDto = new ExercisePostDto(
@@ -170,8 +170,7 @@ class ExerciseControllerTest{
                         responseFields(
                                 fieldWithPath("timestamp").type(JsonFieldType.STRING).description("시간"),
                                 fieldWithPath("status").type(JsonFieldType.STRING).description("상태"),
-                                fieldWithPath("message").type(JsonFieldType.STRING).description("메세지"),
-                                fieldWithPath("result").type(JsonFieldType.NUMBER).description("아이디")
+                                fieldWithPath("message").type(JsonFieldType.STRING).description("메세지")
                         )
                 ))
                 .andReturn();
@@ -183,28 +182,28 @@ class ExerciseControllerTest{
         ExerciseResponseDto responseDto = service.findById(id);
 
         assertThat(responseDto.stdYy()).isEqualTo("2023");
-        assertThat(responseDto.phsrtnFcltyLclasNm()).isEqualTo("체육시설");
-        assertThat(responseDto.phsrtnFcltyMclasNm()).isEqualTo("농구장");
-        assertThat(responseDto.iemNm()).isEqualTo("시설수 (개)");
-        assertThat(responseDto.dataVal()).isEqualTo("1");
+        assertThat(responseDto.largeExerciseFacility()).isEqualTo("체육시설");
+        assertThat(responseDto.middleExerciseFacility()).isEqualTo("농구장");
+        assertThat(responseDto.itemNm()).isEqualTo("시설수 (개)");
+        assertThat(responseDto.dataValue()).isEqualTo("1");
     }
 
     @Test
-    @DisplayName("PUT /exercise/{dataId}")
+    @DisplayName("PUT /exercise/{Id}")
     void put() throws Exception {
 
         ExerciseResponseDto responseDto = service.findAll().get(0);
-        Long dataId = responseDto.dataId();
+        Long Id = responseDto.Id();
 
         ExercisePatchDto putDto = ExercisePatchDto.builder()
-                .dataId(dataId)
+                .Id(Id)
                 .stdYy("2027")
-                .phsrtnFcltyLclasNm("체육시설")
-                .phsrtnFcltyMclasNm("농구장")
-                .iemNm("시설수 (개)")
-                .dataVal("10")
+                .largeExerciseFacility("체육시설")
+                .middleExerciseFacility("농구장")
+                .itemNm("시설수 (개)")
+                .dataValue("10")
                 .build();
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/exercise/{dataId}", responseDto.dataId())
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/exercise/{Id}", responseDto.Id())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(putDto)))
                 .andExpect(status().isAccepted())
@@ -223,27 +222,27 @@ class ExerciseControllerTest{
         String jsonResponse = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
         assertThat(JsonPath.<String>read(jsonResponse, "$.status")).isEqualTo(SuccessCode.SUCCESS_PUT.getHttpStatus().name());
 
-        ExerciseResponseDto afterPut = service.findById(responseDto.dataId());
+        ExerciseResponseDto afterPut = service.findById(responseDto.Id());
 
         assertThat(afterPut.stdYy()).isEqualTo("2027");
-        assertThat(afterPut.phsrtnFcltyLclasNm()).isEqualTo("체육시설");
-        assertThat(afterPut.phsrtnFcltyMclasNm()).isEqualTo("농구장");
-        assertThat(afterPut.iemNm()).isEqualTo("시설수 (개)");
-        assertThat(afterPut.dataVal()).isEqualTo("10");
+        assertThat(afterPut.largeExerciseFacility()).isEqualTo("체육시설");
+        assertThat(afterPut.middleExerciseFacility()).isEqualTo("농구장");
+        assertThat(afterPut.itemNm()).isEqualTo("시설수 (개)");
+        assertThat(afterPut.dataValue()).isEqualTo("10");
     }
 
     @Test
-    @DisplayName("PATCH /exercise/{dataId}")
+    @DisplayName("PATCH /exercise/{Id}")
     void patch() throws Exception {
 
         ExerciseResponseDto responseDto = service.findAll().get(0);
 
-        Long dataId = responseDto.dataId();
+        Long Id = responseDto.Id();
         ExercisePatchDto patchDto = ExercisePatchDto.builder()
-                .dataVal("20")
+                .dataValue("20")
                 .build();
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.patch("/exercise/{dataId}", responseDto.dataId())
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.patch("/exercise/{Id}", responseDto.Id())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(patchDto)))
                 .andExpect(status().isAccepted())
@@ -262,18 +261,18 @@ class ExerciseControllerTest{
         String jsonResponse = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
         assertThat(JsonPath.<String>read(jsonResponse, "$.status")).isEqualTo(SuccessCode.SUCCESS_PUT.getHttpStatus().name());
 
-        ExerciseResponseDto afterPatch = service.findById(responseDto.dataId());
+        ExerciseResponseDto afterPatch = service.findById(responseDto.Id());
 
-        assertThat(afterPatch.dataVal()).isEqualTo("20");
+        assertThat(afterPatch.dataValue()).isEqualTo("20");
     }
 
     @Test
-    @DisplayName("DELETE /exercise/{dataId}")
+    @DisplayName("DELETE /exercise/{Id}")
     void delete() throws Exception {
 
         ExerciseResponseDto responseDto = service.findAll().get(0);
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/exercise/{dataId}",responseDto.dataId())
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/exercise/{Id}",responseDto.Id())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent())
                 .andDo(document("{class-name}/{method-name}",
@@ -291,7 +290,7 @@ class ExerciseControllerTest{
         String jsonResponse = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
 
         CustomException exception = assertThrows(CustomException.class, () -> {
-            service.findById(responseDto.dataId());
+            service.findById(responseDto.Id());
         });
 
         assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.NOT_FOUND);

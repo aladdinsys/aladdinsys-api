@@ -24,20 +24,20 @@ public class ExerciseService {
     public Long save(final ExercisePostDto dto){
         ExerciseEntity entity = ExerciseEntity.builder()
                 .stdYy(dto.stdYy())
-                .phsrtnFcltyLclasNm(dto.phsrtnFcltyLclasNm())
-                .phsrtnFcltyMclasNm(dto.phsrtnFcltyMclasNm())
-                .iemNm(dto.iemNm())
-                .dataVal(dto.dataVal())
+                .largeExerciseFacility(dto.largeExerciseFacility())
+                .middleExerciseFacility(dto.middleExerciseFacility())
+                .itemNm(dto.itemNm())
+                .dataValue(dto.dataValue())
                 .build();
 
         ExerciseEntity saved = repository.save(entity);
-        return saved.getDataId();
+        return saved.Id();
     }
 
     @Transactional(readOnly = true)
-    public ExerciseResponseDto findById(final Long dataId) {
-        ExerciseEntity entity = repository.findById(dataId).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
-        return ExerciseResponseDto.of(entity.getDataId(), entity.getStdYy(), entity.getPhsrtnFcltyLclasNm(), entity.getPhsrtnFcltyMclasNm(), entity.getIemNm(), entity.getDataVal());
+    public ExerciseResponseDto findById(final Long Id) {
+        ExerciseEntity entity = repository.findById(Id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
+        return ExerciseResponseDto.of(entity.getId(), entity.getStdYy(), entity.getLargeExerciseFacility(), entity.getMiddleExerciseFacility(), entity.getItemNm(), entity.getDataValue());
     }
 
     @Transactional
@@ -45,30 +45,30 @@ public class ExerciseService {
         List<ExerciseEntity> entities = repository.findAll();
 
         return entities.stream()
-                .map(entity -> ExerciseResponseDto.of(entity.getDataId(), entity.getStdYy(), entity.getPhsrtnFcltyLclasNm(), entity.getPhsrtnFcltyLclasNm(), entity.getIemNm(), entity.getDataVal()))
+                .map(entity -> ExerciseResponseDto.of(entity.getId(), entity.getStdYy(), entity.getLargeExerciseFacility(), entity.getMiddleExerciseFacility(), entity.getItemNm(), entity.getDataValue()))
                 .toList();
     }
 
     @Transactional
-    public void updateExercise(final Long dataId, final ExercisePostDto dto){
-        ExerciseEntity fetch = repository.findById(dataId).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
-        fetch.update(dto.stdYy(), dto.phsrtnFcltyLclasNm(), dto.phsrtnFcltyMclasNm(), dto.iemNm(), dto.dataVal());
+    public void updateExercise(final Long Id, final ExercisePostDto dto){
+        ExerciseEntity fetch = repository.findById(Id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
+        fetch.update(dto.stdYy(), dto.largeExerciseFacility(), dto.middleExerciseFacility(), dto.itemNm(), dto.dataValue());
     }
 
     @Transactional
-    public void patchExercise(final Long dataId, final ExercisePatchDto dto){
-        ExerciseEntity fetch = repository.findById(dataId).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
+    public void patchExercise(final Long Id, final ExercisePatchDto dto){
+        ExerciseEntity fetch = repository.findById(Id).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND));
 
         Optional.ofNullable(dto.stdYy()).ifPresent(fetch::patchStdYy);
-        Optional.ofNullable(dto.phsrtnFcltyLclasNm()).ifPresent(fetch::patchPhsrtnFcltyLclasNm);
-        Optional.ofNullable(dto.phsrtnFcltyMclasNm()).ifPresent(fetch::patchPhsrtnFcltyMclasNm);
-        Optional.ofNullable(dto.iemNm()).ifPresent(fetch::patchIemNm);
-        Optional.ofNullable(dto.dataVal()).ifPresent(fetch::patchDataVal);
+        Optional.ofNullable(dto.largeExerciseFacility()).ifPresent(fetch::patchLargeExerciseFacility);
+        Optional.ofNullable(dto.middleExerciseFacility()).ifPresent(fetch::patchMiddleExerciseFacility);
+        Optional.ofNullable(dto.itemNm()).ifPresent(fetch::patchItemNm);
+        Optional.ofNullable(dto.dataValue()).ifPresent(fetch::patchDataValue);
     }
 
     @Transactional
-    public void deleteExercise(final Long dataId){
-        repository.deleteById(dataId);
+    public void deleteExercise(final Long Id){
+        repository.deleteById(Id);
     }
 
 }

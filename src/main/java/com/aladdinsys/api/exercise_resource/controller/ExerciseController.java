@@ -29,9 +29,9 @@ public class ExerciseController {
     }
 
     // 조회 by ID
-    @GetMapping("/{dataId}")
-    public DataResponseBody<ExerciseResponseDto> getExerciseId(@PathVariable Long dataId) {
-        return DataResponseBody.of(service.findById(dataId));
+    @GetMapping("/{Id}")
+    public DataResponseBody<ExerciseResponseDto> getExerciseId(@PathVariable Long Id) {
+        return DataResponseBody.of(service.findById(Id));
     }
 
     // 등록
@@ -42,26 +42,26 @@ public class ExerciseController {
     }
 
     // 수정
-    @PutMapping("/{dataId}")
+    @PutMapping("/{Id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseBody putExercise(@PathVariable Long dataId, @Valid @RequestBody ExercisePostDto dto) {
-        service.updateExercise(dataId, dto);
+    public ResponseBody putExercise(@PathVariable Long Id, @Valid @RequestBody ExercisePostDto dto) {
+        service.updateExercise(Id, dto);
         return ResponseBody.of(SUCCESS_PUT);
     }
 
     // 부분수정
-    @PatchMapping("/{dataId}")
+    @PatchMapping("/{Id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseBody patchExercise(@PathVariable Long dataId, @Valid @RequestBody ExercisePatchDto dto) {
-        service.patchExercise(dataId, dto);
+    public ResponseBody patchExercise(@PathVariable Long Id, @Valid @RequestBody ExercisePatchDto dto) {
+        service.patchExercise(Id, dto);
         return ResponseBody.of(SUCCESS_PATCH);
     }
 
     // 삭제
-    @DeleteMapping("/{dataId}")
+    @DeleteMapping("/{Id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseBody deleteExercise(@PathVariable Long dataId){
-        service.deleteExercise(dataId);
+    public ResponseBody deleteExercise(@PathVariable Long Id){
+        service.deleteExercise(Id);
         return ResponseBody.of(SUCCESS_DELETE);
     }
 }

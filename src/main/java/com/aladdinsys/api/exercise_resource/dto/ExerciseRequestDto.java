@@ -9,16 +9,16 @@ public record ExerciseRequestDto(
         @NotNull(message = "년도는 필수 입니다.")
         String stdYy,
         @NotNull(message = "체육시설 대분류는 필수 입니다.")
-        String phsrtnFcltyLclasNm,
+        String largeExerciseFacility,
         @NotNull(message = "체육시설 중분류는 필수 입니다.")
-        String phsrtnFcltyMclasNm,
+        String middleExerciseFacility,
         @NotNull(message = "항목은 필수 입니다.")
-        String iemNm,
+        String itemNm,
         @NotNull(message = "값은 필수 입니다.")
-        String dataVal
+        String dataValue
 ) {
     public ExerciseRequestDto {
-        if (stdYy == null || phsrtnFcltyLclasNm == null || phsrtnFcltyMclasNm == null || iemNm == null || dataVal == null) {
+        if (stdYy == null || largeExerciseFacility == null || middleExerciseFacility == null || itemNm == null || dataValue == null) {
             throw new IllegalArgumentException("must not be null");
         }
     }

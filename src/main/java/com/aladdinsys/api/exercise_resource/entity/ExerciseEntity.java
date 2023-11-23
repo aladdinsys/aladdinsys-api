@@ -15,62 +15,62 @@ public class ExerciseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "data_id", nullable = false)
-    public Long dataId;
+    @Column(name = "id", nullable = false)
+    public Long Id;
 
     @Column(name = "std_yy", nullable = false, length = 4)
     public String stdYy;
 
     @Column(name = "phsrtn_fclty_lclas_nm", nullable = false, length = 20)
-    public String phsrtnFcltyLclasNm;
+    public String largeExerciseFacility;
 
     @Column(name = "phsrtn_fclty_mclas_nm", nullable = false, length = 20)
-    public String phsrtnFcltyMclasNm;
+    public String middleExerciseFacility;
 
     @Column(name = "iem_nm", nullable = false, length = 20)
-    public String iemNm;
+    public String itemNm;
 
     @Column(name = "data_val", nullable = false, length = 20)
-    public String dataVal;
+    public String dataValue;
 
     @Builder
-    public ExerciseEntity(Long dataId,
+    public ExerciseEntity(Long Id,
                           String stdYy,
-                          String phsrtnFcltyLclasNm,
-                          String phsrtnFcltyMclasNm,
-                          String iemNm,
-                          String dataVal
+                          String largeExerciseFacility,
+                          String middleExerciseFacility,
+                          String itemNm,
+                          String dataValue
     ){
-        this.dataId = dataId;
+        this.Id = Id;
         this.stdYy = stdYy;
-        this.phsrtnFcltyLclasNm = phsrtnFcltyLclasNm;
-        this.phsrtnFcltyMclasNm = phsrtnFcltyMclasNm;
-        this.iemNm = iemNm;
-        this.dataVal = dataVal;
+        this.largeExerciseFacility = largeExerciseFacility;
+        this.middleExerciseFacility = middleExerciseFacility;
+        this.itemNm = itemNm;
+        this.dataValue = dataValue;
     }
 
     public void update(String stdYy,
-                       String phsrtnFcltyLclasNm,
-                       String phsrtnFcltyMclasNm,
-                       String iemNm,
-                       String dataVal
+                       String largeExerciseFacility,
+                       String middleExerciseFacility,
+                       String itemNm,
+                       String dataValue
     ) {
         this.stdYy = stdYy;
-        this.phsrtnFcltyLclasNm = phsrtnFcltyLclasNm;
-        this.phsrtnFcltyMclasNm = phsrtnFcltyMclasNm;
-        this.iemNm = iemNm;
-        this.dataVal = dataVal;
+        this.largeExerciseFacility = largeExerciseFacility;
+        this.middleExerciseFacility = middleExerciseFacility;
+        this.itemNm = itemNm;
+        this.dataValue = dataValue;
     }
 
     public void patchStdYy(String stdYy) {this.stdYy = stdYy;}
 
-    public void patchPhsrtnFcltyLclasNm(String phsrtnFcltyLclasNm) {this.phsrtnFcltyLclasNm = phsrtnFcltyLclasNm;}
+    public void patchLargeExerciseFacility(String largeExerciseFacility) {this.largeExerciseFacility = largeExerciseFacility;}
 
-    public void patchPhsrtnFcltyMclasNm(String phsrtnFcltyMclasNm) {this.phsrtnFcltyMclasNm = phsrtnFcltyMclasNm;}
+    public void patchMiddleExerciseFacility(String middleExerciseFacility) {this.middleExerciseFacility = middleExerciseFacility;}
 
-    public void patchIemNm(String iemNm) {this.iemNm = iemNm;}
+    public void patchItemNm(String itemNm) {this.itemNm = itemNm;}
 
-    public void patchDataVal(String dataVal) {this.dataVal = dataVal;}
+    public void patchDataValue(String dataValue) {this.dataValue = dataValue;}
 
 
 }
