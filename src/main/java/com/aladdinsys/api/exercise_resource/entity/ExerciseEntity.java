@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Getter
 @Entity
-@Table(name = "tb_exercise",  uniqueConstraints = {
+@Table(name = "tb_exercise_facility",  uniqueConstraints = {
         @UniqueConstraint(columnNames = {"standard_year", "large_exercise_facility", "middle_exercise_facility", "item_name"})
 })
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

@@ -170,7 +170,8 @@ class ExerciseControllerTest{
                         responseFields(
                                 fieldWithPath("timestamp").type(JsonFieldType.STRING).description("시간"),
                                 fieldWithPath("status").type(JsonFieldType.STRING).description("상태"),
-                                fieldWithPath("message").type(JsonFieldType.STRING).description("메세지")
+                                fieldWithPath("message").type(JsonFieldType.STRING).description("메세지"),
+                                fieldWithPath("result").type(JsonFieldType.NUMBER).description("아이디")
                         )
                 ))
                 .andReturn();
@@ -261,7 +262,7 @@ class ExerciseControllerTest{
         String jsonResponse = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
         assertThat(JsonPath.<String>read(jsonResponse, "$.status")).isEqualTo(SuccessCode.SUCCESS_PUT.getHttpStatus().name());
 
-        ExerciseResponseDto afterPatch = service.findById(responseDto.Id());
+        ExerciseResponseDto afterPatch = service.findById(responseDto.id());
 
         assertThat(afterPatch.dataValue()).isEqualTo("20");
     }
