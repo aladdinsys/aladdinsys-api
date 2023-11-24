@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "administrative_district", uniqueConstraints = {
+@Table(name = "tb_administrative_district", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"standard_year", "city_county_district_name", "administration_name", "item_name", "data_value"})
 })
 @Getter

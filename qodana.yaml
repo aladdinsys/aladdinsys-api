@@ -9,9 +9,9 @@ version: "1.0"
 profile:
   name: qodana.starter
 
-#Enable inspections
-#include:
-#  - name: <SomeEnabledInspectionId>
+# 테스트
+include:
+  - name: JUnitMixedFramework
 
 #Disable inspections
 #exclude:

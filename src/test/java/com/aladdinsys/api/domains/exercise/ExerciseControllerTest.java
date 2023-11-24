@@ -1,12 +1,12 @@
-package com.aladdinsys.api.exercise;
+package com.aladdinsys.api.domains.exercise;
 
 import com.aladdinsys.api.common.constant.ErrorCode;
 import com.aladdinsys.api.common.constant.SuccessCode;
 import com.aladdinsys.api.common.exception.CustomException;
-import com.aladdinsys.api.exercise.dto.ExercisePatchDto;
-import com.aladdinsys.api.exercise.dto.ExercisePostDto;
-import com.aladdinsys.api.exercise.dto.ExerciseResponseDto;
-import com.aladdinsys.api.exercise.service.ExerciseService;
+import com.aladdinsys.api.domains.exercise.dto.ExercisePatchDto;
+import com.aladdinsys.api.domains.exercise.dto.ExercisePostDto;
+import com.aladdinsys.api.domains.exercise.dto.ExerciseResponseDto;
+import com.aladdinsys.api.domains.exercise.service.ExerciseService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +27,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -38,7 +37,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
@@ -238,7 +238,6 @@ class ExerciseControllerTest{
 
         ExerciseResponseDto responseDto = service.findAll().get(0);
 
-        Long id = responseDto.id();
         ExercisePatchDto patchDto = ExercisePatchDto.builder()
                 .dataValue("20")
                 .build();
@@ -290,9 +289,7 @@ class ExerciseControllerTest{
 
         String jsonResponse = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
 
-        CustomException exception = assertThrows(CustomException.class, () -> {
-            service.findById(responseDto.id());
-        });
+        CustomException exception = assertThrows(CustomException.class, () -> service.findById(responseDto.id()));
 
         assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.NOT_FOUND);
         assertThat(JsonPath.<String>read(jsonResponse, "$.status")).isEqualTo(SuccessCode.SUCCESS_DELETE.getHttpStatus().name());
