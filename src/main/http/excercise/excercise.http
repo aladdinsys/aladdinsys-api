@@ -1,0 +1,22 @@
+### Post Request
+POST {{domain}}:{{port}}/{{context-path}}/exercise
+Content-Type: application/json
+
+{
+  "largeExerciseFacility": "대분류"
+}
+
+### Get Request
+GET {{domain}}:{{port}}/{{context-path}}/exercise
+
+### Get One Request
+GET {{domain}}:{{port}}/{{context-path}}/exercise/1
+
+### Put Request
+PUT {{domain}}:{{port}}/{{context-path}}/exercise/1
+Content-Type: application/json
+
+{
+  "name": "부서_수정"
+}
+
