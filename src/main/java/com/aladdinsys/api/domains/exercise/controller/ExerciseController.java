@@ -1,11 +1,11 @@
-package com.aladdinsys.api.exercise.controller;
+package com.aladdinsys.api.domains.exercise.controller;
 
 import com.aladdinsys.api.common.response.DataResponseBody;
 import com.aladdinsys.api.common.response.ResponseBody;
-import com.aladdinsys.api.exercise.dto.ExercisePatchDto;
-import com.aladdinsys.api.exercise.dto.ExercisePostDto;
-import com.aladdinsys.api.exercise.dto.ExerciseResponseDto;
-import com.aladdinsys.api.exercise.service.ExerciseService;
+import com.aladdinsys.api.domains.exercise.dto.ExercisePatchDto;
+import com.aladdinsys.api.domains.exercise.dto.ExercisePostDto;
+import com.aladdinsys.api.domains.exercise.dto.ExerciseResponseDto;
+import com.aladdinsys.api.domains.exercise.service.ExerciseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
