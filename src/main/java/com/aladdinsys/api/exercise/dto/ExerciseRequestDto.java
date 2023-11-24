@@ -1,4 +1,4 @@
-package com.aladdinsys.api.exercise_resource.dto;
+package com.aladdinsys.api.exercise.dto;
 
 import lombok.Builder;
 

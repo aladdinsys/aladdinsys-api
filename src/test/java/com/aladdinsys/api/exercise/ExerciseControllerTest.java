@@ -1,12 +1,12 @@
-package com.aladdinsys.api.exercise_resource;
+package com.aladdinsys.api.exercise;
 
 import com.aladdinsys.api.common.constant.ErrorCode;
 import com.aladdinsys.api.common.constant.SuccessCode;
 import com.aladdinsys.api.common.exception.CustomException;
-import com.aladdinsys.api.exercise_resource.dto.ExercisePatchDto;
-import com.aladdinsys.api.exercise_resource.dto.ExercisePostDto;
-import com.aladdinsys.api.exercise_resource.dto.ExerciseResponseDto;
-import com.aladdinsys.api.exercise_resource.service.ExerciseService;
+import com.aladdinsys.api.exercise.dto.ExercisePatchDto;
+import com.aladdinsys.api.exercise.dto.ExercisePostDto;
+import com.aladdinsys.api.exercise.dto.ExerciseResponseDto;
+import com.aladdinsys.api.exercise.service.ExerciseService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.BeforeEach;

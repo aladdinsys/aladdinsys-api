@@ -1,12 +1,12 @@
-package com.aladdinsys.api.exercise_resource.service;
+package com.aladdinsys.api.exercise.service;
 
 import com.aladdinsys.api.common.constant.ErrorCode;
 import com.aladdinsys.api.common.exception.CustomException;
-import com.aladdinsys.api.exercise_resource.dto.ExercisePatchDto;
-import com.aladdinsys.api.exercise_resource.dto.ExercisePostDto;
-import com.aladdinsys.api.exercise_resource.dto.ExerciseResponseDto;
-import com.aladdinsys.api.exercise_resource.entity.ExerciseEntity;
-import com.aladdinsys.api.exercise_resource.repository.ExerciseRepository;
+import com.aladdinsys.api.exercise.dto.ExercisePatchDto;
+import com.aladdinsys.api.exercise.dto.ExercisePostDto;
+import com.aladdinsys.api.exercise.dto.ExerciseResponseDto;
+import com.aladdinsys.api.exercise.entity.ExerciseEntity;
+import com.aladdinsys.api.exercise.repository.ExerciseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

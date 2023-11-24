@@ -1,4 +1,4 @@
-package com.aladdinsys.api.exercise_resource.entity;
+package com.aladdinsys.api.exercise.entity;
 
 import lombok.AccessLevel;
 import lombok.Builder;
