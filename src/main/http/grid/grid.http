@@ -1,0 +1,101 @@
+### Post Request
+POST {{domain}}:{{port}}/{{context-path}}/grids
+Content-Type: application/json
+
+{
+  "name": "2번 프리셋",
+  "cols": 7,
+  "rows": 7,
+  "items": [
+    {
+      "width": 4,
+      "height": 4,
+      "x": 0,
+      "y": 0,
+      "contentId": 0
+    },
+    {
+      "width": 1,
+      "height": 1,
+      "x": 4,
+      "y": 0,
+      "contentId": 0
+    },
+    {
+      "width": 1,
+      "height": 1,
+      "x": 4,
+      "y": 1,
+      "contentId": 0
+    },
+    {
+      "width": 1,
+      "height": 1,
+      "x": 5,
+      "y": 0,
+      "contentId": 0
+    },
+    {
+      "width": 1,
+      "height": 1,
+      "x": 5,
+      "y": 1,
+      "contentId": 0
+    },
+    {
+      "width": 1,
+      "height": 1,
+      "x": 6,
+      "y": 0,
+      "contentId": 0
+    },
+    {
+      "width": 1,
+      "height": 1,
+      "x": 6,
+      "y": 1,
+      "contentId": 0
+    }
+  ]
+
+
+}
+
+### Get Request
+GET {{domain}}:{{port}}/{{context-path}}/grids
+
+### Get One Request
+GET {{domain}}:{{port}}/{{context-path}}/grids/1
+
+### Put Request
+PUT {{domain}}:{{port}}/{{context-path}}/grids/1
+Content-Type: application/json
+
+{
+  "name": "Put 테스트 Preset",
+  "cols": 10,
+  "rows": 10,
+  "items": [
+    {
+      "width": 4,
+      "height": 4,
+      "x": 0,
+      "y": 0,
+      "contentId": 0
+    }
+  ]
+
+
+}
+
+### Patch Request
+PATCH {{domain}}:{{port}}/{{context-path}}/grids/1
+Content-Type: application/json
+
+{
+  "name": "직원_PATCH"
+}
+
+
+### Delete Request
+DELETE {{domain}}:{{port}}/{{context-path}}/grids/1

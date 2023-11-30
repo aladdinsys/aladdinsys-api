@@ -1,0 +1,22 @@
+[[GRIDAPI]]
+== Grid API
+
+=== 목록 조회
+include::{snippets}/grid-controller-test/get-grids/http-request.adoc[]
+include::{snippets}/grid-controller-test/get-grids/http-response.adoc[]
+
+=== ID로 조회
+include::{snippets}/grid-controller-test/get-grid/http-request.adoc[]
+include::{snippets}/grid-controller-test/get-grid/http-response.adoc[]
+
+=== 등록
+include::{snippets}/grid-controller-test/post/http-request.adoc[]
+include::{snippets}/grid-controller-test/post/http-response.adoc[]
+
+=== 수정
+include::{snippets}/grid-controller-test/put/http-request.adoc[]
+include::{snippets}/grid-controller-test/put/http-response.adoc[]
+
+=== 삭제
+include::{snippets}/grid-controller-test/delete/http-request.adoc[]
+include::{snippets}/grid-controller-test/delete/http-response.adoc[]
