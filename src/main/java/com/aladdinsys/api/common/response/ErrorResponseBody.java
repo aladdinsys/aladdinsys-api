@@ -22,6 +22,10 @@ public class ErrorResponseBody extends ResponseBody {
         return new ErrorResponseBody(errorCode.getHttpStatus(), errorCode.getMessage(), errorCode.name(), errorCode.getStatusName());
     }
 
+    public static <T extends ErrorCode> ErrorResponseBody of(@NotNull T errorCode, String message) {
+        return new ErrorResponseBody(errorCode.getHttpStatus(), message, errorCode.name(), errorCode.getStatusName());
+    }
+
     public static <T extends ErrorCode> ErrorResponseBody of(HttpStatus status, String message, @NotNull T errorCode) {
         return new ErrorResponseBody(status, message, errorCode.name(), errorCode.getStatusName());
     }

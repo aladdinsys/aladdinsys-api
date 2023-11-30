@@ -12,4 +12,5 @@ API 문서는 AsciiDoc으로 작성되었습니다.
 include::department.adoc[]
 include::employee.adoc[]
 include::administrative_district.adoc[]
+include::grids.adoc[]
 
