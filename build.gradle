@@ -9,7 +9,8 @@ plugins {
     id 'org.springframework.boot' version '2.7.3'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
-    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+    id 'com.diffplug.spotless' version '6.13.0'
+    id 'com.ewerk.gradle.plugins.querydsl' version "1.0.10"
 }
 
 group = 'com.aladdinsys'
@@ -22,8 +23,8 @@ java {
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
-    }
 
+    }
     asciidoctorExt
 }
 
@@ -86,7 +87,6 @@ compileQuerydsl {
     options.annotationProcessorPath = configurations.querydsl
 }
 
-
 tasks.named('test', Test) {
     outputs.dir snippetsDir
     useJUnitPlatform()
@@ -97,13 +97,12 @@ asciidoctor {
     configurations 'asciidoctorExt'
     dependsOn test
 
-    sources{
-        include("**/index.adoc","**/*.adoc")
+    sources {
+        include("**/index.adoc", "**/*.adoc")
     }
 
     baseDirFollowsSourceFile()
 }
-
 
 asciidoctor.doFirst {
     delete file("src/main/resources/static/docs")
@@ -114,9 +113,20 @@ bootJar {
     finalizedBy('copyDocument')
 }
 
-task copyDocument(type: Copy) {
+tasks.register('copyDocument', Copy) {
     dependsOn bootJar
     from layout.buildDirectory.dir('docs/asciidoc').get().asFile
     into file("src/main/resources/static/docs")
 }
 
+spotless {
+    java {
+        target fileTree(dir: 'src/main/java', include: '**/*.java')
+        googleJavaFormat()
+        removeUnusedImports()
+        importOrder()
+
+        licenseHeader '/* (C) $YEAR */' // or licenseHeaderFile
+    }
+}
+spotlessJava.dependsOn('compileQuerydsl')

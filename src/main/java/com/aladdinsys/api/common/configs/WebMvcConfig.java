@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package com.aladdinsys.api.common.configs;
 
 import org.springframework.context.annotation.Configuration;
@@ -10,12 +11,13 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 @EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/docs/**")
-                .addResourceLocations("classpath:/static/docs/")
-                .setCachePeriod(20)
-                .resourceChain(true)
-                .addResolver(new PathResourceResolver());
-    }
+  @Override
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry
+        .addResourceHandler("/docs/**")
+        .addResourceLocations("classpath:/static/docs/")
+        .setCachePeriod(20)
+        .resourceChain(true)
+        .addResolver(new PathResourceResolver());
+  }
 }

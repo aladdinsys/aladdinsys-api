@@ -1,3 +1,4 @@
+/* (C) 2023 */
 package com.aladdinsys.api.common.configs;
 
 import org.springframework.context.annotation.Bean;
@@ -8,16 +9,18 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig  {
+public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .anyRequest().permitAll();
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http.csrf()
+        .disable()
+        .authorizeRequests()
+        .antMatchers("/**")
+        .permitAll()
+        .anyRequest()
+        .permitAll();
 
-        return http.build();
-    }
+    return http.build();
+  }
 }
